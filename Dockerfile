@@ -1,6 +1,10 @@
-FROM nginx:alpine
+FROM node
 
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /usr/share/nginx/html
-COPY myAngularApp/dist/ .
+RUN npm install -g @angular/cli
+
+COPY my-angular-site/ /usr/src/app
+
+CMD ng serve --host 0.0.0.0 --port 4200
